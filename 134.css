@@ -6,3 +6,18 @@
    background-color: grey;
    color: white;
    text-align: center;
+
+}
+
+/*Webkit presiserer stilen og egenskapen til skrolle-baren/søylen til venstre, når man holder pekeren over den*/
+::-webkit-scrollbar {
+  width: 8.5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #483D8B;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #7B68EE;
+}
