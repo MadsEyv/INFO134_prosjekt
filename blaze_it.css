@@ -1,0 +1,37 @@
+body
+{
+  margin: 0%;
+}
+
+#red
+{
+  width: 30%;
+  height: 50%;
+  background-color: red;
+  float: left;
+}
+
+#yellow
+{
+  width: 30%;
+  height: 50%;
+  background-color: yellow;
+  float: left;
+}
+
+#green
+{
+  width: 30%;
+  height: 50%;
+  background-color: green;
+  float: left;
+}
+
+footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: grey;
+   color: white;
+   text-align: center;
