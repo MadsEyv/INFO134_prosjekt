@@ -76,14 +76,12 @@ var sysselsatte = new constructor("http://wildboy.uib.no/~tpe056/folk/100145.jso
 sysselsatte.load("syssels");
 var utdanning = new constructor("http://wildboy.uib.no/~tpe056/folk/85432.json");
 utdanning.load("utdan");
-
 function headers(div, data){
  var h = document.createElement("H1")
  var t = document.createTextNode(data);
  h.appendChild(t);
  document.getElementById(div).appendChild(h);
  }
-
 function appendrad(tabell, rowid, dataid) {
   var rad = document.createElement("TR");
   rad.setAttribute("id", rowid);
@@ -155,7 +153,7 @@ appendlist("detaljeliste", "Total befolkning(2018): " + test);
   var kvinner2 = sys.data.Kvinner[2011]
   var totalum = (menn2 + kvinner2) / 2
   appendlist("detaljeliste", "Sist målt sysselsetting(2011): " + totalum);
-
+ //appendlist("detaljeliste", "Siste målt sysselsetting: "
  var menn3 = be.data.Menn[2011];
  var kvinner3 = be.data.Kvinner[2011];
  var test2 = menn3 + kvinner3;
@@ -198,38 +196,4 @@ for (var i in sys.data.Menn){
 for (i in sys.data["Begge kjønn"]) {
   addinfotorad("endring", sys.data["Begge kjønn"][i])
 }
-
-headers("informasjonsting", "Utdanning")
-var sysvekst = document.createElement("TABLE");
-sysvekst.setAttribute("id", "sysvekst");
-document.getElementById('informasjonsting').appendChild(sysvekst);
-appendrad("sysvekst", "kek", "år");
-appendrad("sysvekst", "endring", "vekst");
-for (var i in sys.data.Menn){
-  addinfotorad("kek", i)
-}
-for (i in sys.data["Begge kjønn"]) {
-  addinfotorad("endring", sys.data["Begge kjønn"][i])
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 };
