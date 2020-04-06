@@ -149,29 +149,29 @@ for (var i in be.data) {
     var test = menn + kvinner;
 }
 appendlist("detaljeliste", "Total befolkning(2018): " + test);
-  var menn2 = sys.data.Menn[2011]
-  var kvinner2 = sys.data.Kvinner[2011]
+  var menn2 = sys.data.Menn[2018]
+  var kvinner2 = sys.data.Kvinner[2018]
   var totalum = (menn2 + kvinner2) / 2
-  appendlist("detaljeliste", "Sist målt sysselsetting(2011): " + totalum);
+  appendlist("detaljeliste", "Sist målt sysselsetting(2018): " + totalum);
  //appendlist("detaljeliste", "Siste målt sysselsetting: "
- var menn3 = be.data.Menn[2011];
- var kvinner3 = be.data.Kvinner[2011];
+ var menn3 = be.data.Menn[2018];
+ var kvinner3 = be.data.Kvinner[2018];
  var test2 = menn3 + kvinner3;
  var antallsys = test2 * (totalum / 100);
- appendlist("detaljeliste", "antall sysselsettet(2011): " + antallsys);
+ appendlist("detaljeliste", "antall sysselsettet(2018): " + antallsys);
 
-var what = ut.data["03a"].Menn[2017]
-var what2 = ut.data["04a"].Menn[2017]
-var what3 = ut.data["03a"].Kvinner[2017]
-var what4 = ut.data["04a"].Kvinner[2017]
-temp = (what + what2 + what3 + what4) / 4
-var menn4 = be.data.Menn[2017];
-var kvinner4 = be.data.Kvinner[2017];
-var test3 = menn4 + kvinner4;
-var antallutd = test3 * (temp / 100);
- appendlist("detaljeliste", "antall utdannet(2017): " + antallutd);
-
-
+var menn1 = ut.data["03a"].Menn[2017]
+var menn2 = ut.data["04a"].Menn[2017]
+var kvinner1 = ut.data["03a"].Kvinner[2017]
+var kvinner2 = ut.data["04a"].Kvinner[2017]
+var totalmenn = be.data.Menn[2017];
+var totalkvinne = be.data.Kvinner[2017];
+var prosmenn1 = totalmenn / 100 * menn1;
+var prosmenn2 = totalmenn / 100 * menn2;
+var proskvinne1 = totalkvinne / 100 * kvinner1;
+var proskvinne2 = totalkvinne / 100 * kvinner2;
+totaltutdannet = prosmenn1 + prosmenn2 + proskvinne1 + proskvinne2;
+ appendlist("detaljeliste", "antall utdannet(2017): " + totaltutdannet);
 
 headers("informasjonsting", "Befolkning")
 var befvekst = document.createElement("TABLE");
@@ -184,7 +184,7 @@ for (var i in be.data.Kvinner)
   addinfotorad("års", i)
 for (var i in be.data.Kvinner)
   addinfotorad("vekstt", be.data.Menn[i] + be.data.Kvinner[i])
-headers("informasjonsting", "Sysselsatte")
+headers("informasjonsting", "Sysselsattevekst")
 var sysvekst = document.createElement("TABLE");
 sysvekst.setAttribute("id", "sysvekst");
 document.getElementById('informasjonsting').appendChild(sysvekst);
@@ -196,4 +196,31 @@ for (var i in sys.data.Menn){
 for (i in sys.data["Begge kjønn"]) {
   addinfotorad("endring", sys.data["Begge kjønn"][i])
 }
+
+headers("informasjonsting", "Utdanningsvekst")
+var utvekst = document.createElement("TABLE");
+utvekst.setAttribute("id", "utvekst");
+document.getElementById('informasjonsting').appendChild(utvekst);
+appendrad("utvekst", "year", "år");
+appendrad("utvekst", "11", "11");
+appendrad("utvekst", "01", "01");
+appendrad("utvekst", "02a", "02a");
+appendrad("utvekst", "03a", "03a");
+appendrad("utvekst", "04a", "04a");
+appendrad("utvekst", "09a", "09a");
+for (var i in ut.data["01"].Menn) {
+  addinfotorad("year", i)
+}
+var alle =  ["11", "01", "02a", "03a", "04a", "09a"];
+ for (var kk in ut.data["01"].Menn) {
+  var arrayLength = alle.length;
+  for (var i = 0; i < arrayLength; i++) {
+    xxx = alle[i]
+     var tall1 = ut.data[xxx].Menn[kk];
+     var tall2 = ut.data[xxx].Kvinner[kk];
+     var gjennomsnittet = (tall1 + tall2) / 2;
+     gjennomsnittet = Math.round(gjennomsnittet * 100) / 100;
+     addinfotorad(xxx, gjennomsnittet)
+   }
+ }
 };
