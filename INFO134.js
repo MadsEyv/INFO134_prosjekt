@@ -8,7 +8,7 @@ function closeNav() {
 function removediv(div) {
   var liste = ["intro", "oversikt", "detaljer", "sammenligning"];
   for (var i in liste) {
-    if (liste[i] === div) {
+    if (liste[i] == div) {
       document.getElementById(liste[i]).style.display = "block";
     }
     else{
@@ -20,7 +20,6 @@ function removediv(div) {
 function constructor(fil){
 //vi lagde en universal konstruktør for å gjøre ting mer oversiktlig.
 this.load = function(kategori){
-  //denne funksjonen sender forespørsel om å laste ned datasettet.
   var respons = undefined;
   var htp = new XMLHttpRequest();
   htp.open("GET", fil, true);
@@ -59,20 +58,16 @@ this.load = function(kategori){
     }
     return list;
   };
-/* Her tar vi et parameter kommunenr, og iterer over for å sammenligne.
-   Derved tar vi å lager et nytt object(information), og legger til properties
-   som name og data av den valgte kommunen. */
-  this.getInfo = function(kommunenr) {
-    for (var x in this.data) {
-      if (this.data[x].kommunenummer == kommunenr) {
-        var information = new Object();
-        information.name = x;
-        information.data = this.data[g];
-        return information
-      }
-    }
-    return list;
-  };
+   this.getInfo = function(kn){
+     for (var g in this.data) {
+       if (this.data[g].kommunenummer == kn){
+         var q = new Object({});
+         q.name = g;
+         q.data = this.data[g];
+         return q;
+       }
+     }
+   };
 };
 
 var befolkning = new constructor("http://wildboy.uib.no/~tpe056/folk/104857.json");
@@ -81,6 +76,14 @@ var sysselsatte = new constructor("http://wildboy.uib.no/~tpe056/folk/100145.jso
 sysselsatte.load("syssels");
 var utdanning = new constructor("http://wildboy.uib.no/~tpe056/folk/85432.json");
 utdanning.load("utdan");
+
+function headers(div, data){
+ var h = document.createElement("H1")
+ var t = document.createTextNode(data);
+ h.appendChild(t);
+ document.getElementById(div).appendChild(h);
+ }
+
 function appendrad(tabell, rowid, dataid) {
   var rad = document.createElement("TR");
   rad.setAttribute("id", rowid);
@@ -124,31 +127,109 @@ function oversiktTabell(){
   }
 
 };
+
+function appendlist(id, data) {
+  var y = document.createElement("LI");
+  var t = document.createTextNode(data);
+  y.appendChild(t);
+  document.getElementById(id).appendChild(y);
+}
 function detaljTabell(){
-  document.getElementById("detaljer").innerHTML="";
-  var tabell2 = document.createElement("TABLE");
-  tabell2.setAttribute("id", "tabell2");
-  document.getElementById('detaljer').appendChild(tabell2);
-  var id = document.getElementById("inputnr".value)
-  try {
-  /*
-  var befolkningsinfo = befolkning.getInfo(id)
-  var sysselsatteinfo = sysselsatte.getInfo(id)
-  var utdanningsinfo = utdanning.getInfo(id)
-  */
-  if(id == "") throw "ingenting skrevet!";
-  }
-  catch(err) {
-    document.getElementById('detaljer').innerHTML= "Feil:" + err;
-  }
-    appendrad("tabell2", "byer", "kommuner");
-    appendrad("tabell2", "ider", "kommuneID");
-    appendrad("tabell2", "bef", "befolkning");
-    appendrad("tabell2", "befvekst", "befolkningsvekst");
-    appendrad("tabell2", "statsant", "statistikk for sysselsetting");
-    appendrad("tabell2", "statspros", "prosent for sysselsetting");
-    appendrad("tabell2", "utdanant", "utdanning antall");
-    appendrad("tabell2", "utdanpros", "utdanning prosent");
+  document.getElementById("informasjonsting").innerHTML="";
+  var loadeddata = document.getElementById("listeinfo").value;
+  var sys = sysselsatte.getInfo(loadeddata)
+  var ut = utdanning.getInfo(loadeddata)
+  var be = befolkning.getInfo(loadeddata)
+  var what = document.createElement("UL");
+  what.setAttribute("id", "detaljeliste");
+  document.getElementById('informasjonsting').appendChild(what);
+  appendlist("detaljeliste", "Kommune: " + be.name)
+  appendlist("detaljeliste", "Kommunenr: " + loadeddata)
+for (var i in be.data) {
+    var menn = be.data.Menn[2018];
+    var kvinner = be.data.Kvinner[2018];
+    var test = menn + kvinner;
+}
+appendlist("detaljeliste", "Total befolkning(2018): " + test);
+  var menn2 = sys.data.Menn[2011]
+  var kvinner2 = sys.data.Kvinner[2011]
+  var totalum = (menn2 + kvinner2) / 2
+  appendlist("detaljeliste", "Sist målt sysselsetting(2011): " + totalum);
+
+ var menn3 = be.data.Menn[2011];
+ var kvinner3 = be.data.Kvinner[2011];
+ var test2 = menn3 + kvinner3;
+ var antallsys = test2 * (totalum / 100);
+ appendlist("detaljeliste", "antall sysselsettet(2011): " + antallsys);
+
+var what = ut.data["03a"].Menn[2017]
+var what2 = ut.data["04a"].Menn[2017]
+var what3 = ut.data["03a"].Kvinner[2017]
+var what4 = ut.data["04a"].Kvinner[2017]
+temp = (what + what2 + what3 + what4) / 4
+var menn4 = be.data.Menn[2017];
+var kvinner4 = be.data.Kvinner[2017];
+var test3 = menn4 + kvinner4;
+var antallutd = test3 * (temp / 100);
+ appendlist("detaljeliste", "antall utdannet(2017): " + antallutd);
+
+
+
+headers("informasjonsting", "Befolkning")
+var befvekst = document.createElement("TABLE");
+befvekst.setAttribute("id", "befvekst");
+document.getElementById('informasjonsting').appendChild(befvekst);
+appendrad("befvekst", "års", "år");
+appendrad("befvekst", "vekstt", "befolkningsendring");
+
+for (var i in be.data.Kvinner)
+  addinfotorad("års", i)
+for (var i in be.data.Kvinner)
+  addinfotorad("vekstt", be.data.Menn[i] + be.data.Kvinner[i])
+headers("informasjonsting", "Sysselsatte")
+var sysvekst = document.createElement("TABLE");
+sysvekst.setAttribute("id", "sysvekst");
+document.getElementById('informasjonsting').appendChild(sysvekst);
+appendrad("sysvekst", "kek", "år");
+appendrad("sysvekst", "endring", "vekst");
+for (var i in sys.data.Menn){
+  addinfotorad("kek", i)
+}
+for (i in sys.data["Begge kjønn"]) {
+  addinfotorad("endring", sys.data["Begge kjønn"][i])
+}
+
+headers("informasjonsting", "Utdanning")
+var sysvekst = document.createElement("TABLE");
+sysvekst.setAttribute("id", "sysvekst");
+document.getElementById('informasjonsting').appendChild(sysvekst);
+appendrad("sysvekst", "kek", "år");
+appendrad("sysvekst", "endring", "vekst");
+for (var i in sys.data.Menn){
+  addinfotorad("kek", i)
+}
+for (i in sys.data["Begge kjønn"]) {
+  addinfotorad("endring", sys.data["Begge kjønn"][i])
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 };
-  var id = document.getElementById("inputnr".value)

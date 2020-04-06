@@ -32,23 +32,38 @@
     </p>
       <strong>Kilder for datasettene</strong><br>
       <ul class="links">
-        <li><a href="http://data.ssb.no/api/v0/dataset/104857?lang=no">Befolkning, etter kjønn, Kommuner pr 1.1.2007 - siste år</a></li>
+|        <li><a href="http://data.ssb.no/api/v0/dataset/104857?lang=no">Befolkning, etter kjønn, Kommuner pr 1.1.2007 - siste år</a></li>
         <li><a href="http://data.ssb.no/api/v0/dataset/100145?lang=no">Sysselsatte pr. 4. kv. etter kjønn og alder (andel i prosent). Kommuner, 2005 - siste år</a></li>
         <li><a href="http://data.ssb.no/api/v0/dataset/85432?lang=no">Utdannningsnivå. Personer 16 år og over, etter kjønn, i prosent. Kommuner, 1970 - siste år</a></li>
       </ul>
 </div>
-
-  <div id="oversikt" style="display:none">
+<div id="oversikt" style="display:none">
+    <button id="test" onclick="oversiktTabell()">&#9776; Open Table</button>
 </div>
-
 <div id="detaljer" style="display:none">
     <h1>Detaljer om kommuner</h1>
     <label for="fname"><strong>skriv inn kommunenummer:</strong> </label>
-    <input id="inputnr"  type="text">
-    <button type="submit" value="kjørda" onclick="detaljTabell()">kjørda</button>
-    <div id="detaljer"></div>
-  </div>
-<div id="sammenligning"></div>
+    <input type="text" placeholder="skriv her" id="listeinfo">
+    <button type="button" onclick="detaljTabell();">vis data</button>
+    <div id="informasjonsting"></div>
+    <div id="befolkningsvekstting"></div>
+    </div>
+
+
+    <div id="sammenligning" style="display:none">
+      <h2>Sammenligning av kommuner</h2>
+      <label for="fname">Kommune 1:</label><br>
+
+      <input type="text" placeholder="Kommunenummer" id="komu1" name="komu1"><br>
+      <br>
+      <label for="lname">Kommune 2:</label><br>
+      <input type="text" placeholder="Kommunenumer" id="komu2" name="komu2">
+      <br>
+      <br>
+      <button id="SL" onclick="compare()">Sammenlign</button>
+      <div id="sammenlign"></div>
+    </div>
+
 <div class="footer">
     <p>Dette er en oppgavebesvarelse i emnet INFO134</p></div>
 </body
