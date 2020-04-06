@@ -196,4 +196,19 @@ for (var i in sys.data.Menn){
 for (i in sys.data["Begge kjønn"]) {
   addinfotorad("endring", sys.data["Begge kjønn"][i])
 }
+headers("informasjonsting", "Utdanning")
+var utdvekst = document.createElement("TABLE");
+utdvekst.setAttribute("id", "utdvekst");
+document.getElementById('informasjonsting').appendChild(utdvekst);
+appendrad("utdvekst", "år3", "Utdannings år");
+appendrad("utdvekst", "11utd", "11");
+appendrad("utdvekst", "01utd", "01");
+appendrad("utdvekst", "02autd", "02a");
+appendrad("utdvekst", "03autd", "03a");
+appendrad("utdvekst", "04autd", "04a");
+appendrad("utdvekst", "09autd", "09a");
+
+for (var i in ut.data["01"].Kvinner) {
+  addinfotorad("år3", i)
+}
 };
