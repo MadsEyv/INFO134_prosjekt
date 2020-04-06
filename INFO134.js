@@ -8,7 +8,7 @@ function closeNav() {
 function removediv(div) {
   var liste = ["intro", "oversikt", "detaljer", "sammenligning"];
   for (var i in liste) {
-    if (liste[i] == div) {
+    if (liste[i] === div) {
       document.getElementById(liste[i]).style.display = "block";
     }
     else{

@@ -11,7 +11,7 @@
     <div id="mySidebar" class="sidebar">
     <button href="javascript:void(0)" class="x" onclick="closeNav()">&times;</button>
     <button id="Introduksjon" class="TableButton" onclick="removediv('intro');">Introduksjon</button>
-    <button id="Oversikt" class="TableButton" value="oversikt" onclick="removediv('oversikt');">Oversikt</button>
+    <button id="Oversikt" class="TableButton" value="oversikt" onclick="removediv('oversikt'); oversiktTabell();">Oversikt</button>
     <button id="Detaljer" class="TableButton" onclick="removediv('detaljer');">Detaljer</button>
     <button id="Sammenligning" class="TableButton" onclick="removediv('sammenligning');">Sammenligning</button>
   </div>
@@ -37,10 +37,11 @@
         <li><a href="http://data.ssb.no/api/v0/dataset/85432?lang=no">Utdannningsnivå. Personer 16 år og over, etter kjønn, i prosent. Kommuner, 1970 - siste år</a></li>
       </ul>
 </div>
-<div id='oversikt'>
-    <button id="test" onclick="oversiktTabell()">&#9776; Open Table</button>
+
+  <div id="oversikt" style="display:none">
 </div>
-<div>
+
+<div id="detaljer" style="display:none">
     <h1>Detaljer om kommuner</h1>
     <label for="fname"><strong>skriv inn kommunenummer:</strong> </label>
     <input id="inputnr"  type="text">
