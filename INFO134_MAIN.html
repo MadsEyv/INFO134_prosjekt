@@ -7,11 +7,48 @@
 <link rel="stylesheet" href="134.css">
 </head>
 <body>
-
-
-<div class="footer">
-    <p>Dette er en oppgavebesvarelse i emnet INFO134</p>
+    <button id="mainbutton"class="openbtn" onclick="openNav()">&#9776; Navigasjonsbaren</button>
+    <div id="mySidebar" class="sidebar">
+    <button href="javascript:void(0)" class="x" onclick="closeNav()">&times;</button>
+    <button id="Introduksjon" class="TableButton" onclick="removediv('intro');">Introduksjon</button>
+    <button id="Oversikt" class="TableButton" value="oversikt" onclick="removediv('oversikt');">Oversikt</button>
+    <button id="Detaljer" class="TableButton" onclick="removediv('detaljer');">Detaljer</button>
+    <button id="Sammenligning" class="TableButton" onclick="removediv('sammenligning');">Sammenligning</button>
   </div>
 
+  <div id='intro'>
+    <h1>Data om Norges befolkning.</h1>
+    <h4>Av Mads Thorstensen, Eyvind Eikeng og Syver Ekeberg</h4>
+    <p>
+      Denne nettsiden viser informasjon om Norges befolkning ved bruk av data fra Statistisk
+      Sentralbyra. Bruk navigasjonsbaren ovenfor for å begynne. All data vises i tabell form.<br><br>
+      <strong>Oversikt</strong><br>
+      Henviser til alle kommunene og deres totale befolkning, og kommunenummer.<br><br>
+      <strong>Detaljer</strong><br>
+      Lar deg søke på enkelt kommuner for å få mer detaljer om dem. Dette vil vise en tabell med
+      kommunens navn, kommunenummer, siste målt befolkning, siste målte statistikk for sysselsetning og høyere utdanning.<br><br>
+      <strong>Sammenligning</strong><br>
+      Her kan man skrive inn to kommunenr. for å sammenligne  utdannings-dataen mellom dem. Her blir det også erklært en "vinner" av den kommunen som er høyst udannet <br><br>
+    </p>
+      <strong>Kilder for datasettene</strong><br>
+      <ul class="links">
+        <li><a href="http://data.ssb.no/api/v0/dataset/104857?lang=no">Befolkning, etter kjønn, Kommuner pr 1.1.2007 - siste år</a></li>
+        <li><a href="http://data.ssb.no/api/v0/dataset/100145?lang=no">Sysselsatte pr. 4. kv. etter kjønn og alder (andel i prosent). Kommuner, 2005 - siste år</a></li>
+        <li><a href="http://data.ssb.no/api/v0/dataset/85432?lang=no">Utdannningsnivå. Personer 16 år og over, etter kjønn, i prosent. Kommuner, 1970 - siste år</a></li>
+      </ul>
+</div>
+<div id='oversikt'>
+    <button id="test" onclick="oversiktTabell()">&#9776; Open Table</button>
+</div>
+<div>
+    <h1>Detaljer om kommuner</h1>
+    <label for="fname"><strong>skriv inn kommunenummer:</strong> </label>
+    <input id="inputnr"  type="text">
+    <button type="submit" value="kjørda" onclick="detaljTabell()">kjørda</button>
+    <div id="detaljer"></div>
+  </div>
+<div id="sammenligning"></div>
+<div class="footer">
+    <p>Dette er en oppgavebesvarelse i emnet INFO134</p></div>
 </body
 </html>
